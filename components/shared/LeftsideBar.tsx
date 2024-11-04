@@ -12,6 +12,7 @@ const LeftSidebar = () => {
   const pathname = usePathname();
   const { userId } = useAuth();
   const links = pathname.includes("/tnp") ? sidebarLinks2 : sidebarLinks3;
+  const isStudent = links === sidebarLinks3;
 
   return (
     <section className="custom-scrollbar leftsidebar">
@@ -27,27 +28,43 @@ const LeftSidebar = () => {
           const isActive = pathname === route;
 
           return (
-            <Link
-              href={route}
-              key={link.label}
-              className={`leftsidebar_link ${
-                isActive ? "bg-primary-500" : "bg-transparent"
-              } transition duration-200`}
-            >
-              <Image
-                src={link.imgURL}
-                alt={link.label}
-                width={24}
-                height={24}
-              />
-              <p
-                className={`text-light-1 ${
-                  isActive ? "font-bold" : ""
-                } max-lg:hidden`}
+            <>
+              <Link
+                href={route}
+                key={link.label}
+                className={`leftsidebar_link ${
+                  isActive ? "bg-primary-500" : "bg-transparent"
+                } transition duration-200`}
               >
-                {link.label}
-              </p>
-            </Link>
+                <Image
+                  src={link.imgURL}
+                  alt={link.label}
+                  width={24}
+                  height={24}
+                />
+                <p
+                  className={`text-light-1 ${
+                    isActive ? "font-bold" : ""
+                  } max-lg:hidden`}
+                >
+                  {link.label}
+                </p>
+              </Link>
+              {isStudent && (
+                <Link
+                  className={`leftsidebar_link transition duration-200`}
+                  href={"https://resume-io-inky.vercel.app/"}
+                >
+                  <Image
+                    src={"/assets/resume.png"}
+                    alt={"resume"}
+                    width={24}
+                    height={24}
+                  />
+                  <p className={`text-light-1 max-lg:hidden`}>Resume</p>
+                </Link>
+              )}
+            </>
           );
         })}
 

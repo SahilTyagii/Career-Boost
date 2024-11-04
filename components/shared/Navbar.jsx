@@ -49,7 +49,6 @@ const Navbar = () => {
       elevation={0}
       sx={{
         py: 1,
-        height: NAVBAR_HEIGHT,
         bgcolor: scrollPosition > 10 ? "rgba(7,7,16,.7)" : "transparent",
         backdropFilter: scrollPosition > 10 && "blur(60px)",
       }}
@@ -80,20 +79,26 @@ const Navbar = () => {
               sx={{ flex: 1 }}
               flexWrap="wrap"
             >
-              <LinkButton>
-                <Typography variant="body2">Home</Typography>
-                <KeyboardArrowDownIcon fontSize="small" />
-              </LinkButton>
+              <Link href={"/"}>
+                <LinkButton>
+                  <Typography variant="body2">Home</Typography>
+                  <KeyboardArrowDownIcon fontSize="small" />
+                </LinkButton>
+              </Link>
 
-              <LinkButton>
-                <Typography variant="body2">TnP</Typography>
-                <KeyboardArrowDownIcon fontSize="small" />
-              </LinkButton>
+              <Link href={"/tnp"}>
+                <LinkButton>
+                  <Typography variant="body2">TnP</Typography>
+                  <KeyboardArrowDownIcon fontSize="small" />
+                </LinkButton>
+              </Link>
 
-              <LinkButton>
-                <Typography variant="body2">Employers</Typography>
-                <KeyboardArrowDownIcon fontSize="small" />
-              </LinkButton>
+              <Link href={"/student"}>
+                <LinkButton>
+                  <Typography variant="body2">Students</Typography>
+                  <KeyboardArrowDownIcon fontSize="small" />
+                </LinkButton>
+              </Link>
 
               <LinkButton>
                 <Typography variant="body2">About Us</Typography>

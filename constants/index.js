@@ -5,6 +5,11 @@ export const sidebarLinks3 = [
     route: "/student",
     label: "Home",
   },
+  // {
+  //   imgURL: "/assets/resume.png",
+  //   route: "/student/resume",
+  //   label: "Resume",
+  // },
 ];
 
 export const sidebarLinks = [
@@ -52,12 +57,11 @@ export const sidebarLinks2 = [
     route: "/tnp/create-thread",
     label: "Post Thread",
   },
-
-  {
-    imgURL: "/assets/user.svg",
-    route: "/tnp/profile",
-    label: "Profile",
-  },
+  // {
+  //   imgURL: "/assets/user.svg",
+  //   route: "/tnp/profile",
+  //   label: "Profile",
+  // },
   {
     imgURL: "/assets/calendar.svg",
     route: "https://calender-chi.vercel.app/calendar",

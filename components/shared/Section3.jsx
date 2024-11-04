@@ -67,6 +67,14 @@ const Section4 = () => {
         alignItems="center"
         sx={{ mt: { xs: 5, md: -5 } }}
       >
+        {/* Right */}
+        <Grid item xs={12} md={6}>
+          <img
+            src="/assets/tnp.png"
+            style={{ width: "100%", objectFit: "contain" }}
+          />
+        </Grid>
+
         {/* Left */}
         <Grid item xs={12} md={6}>
           <Stack spacing={2} sx={{ maxWidth: 480 }}>
@@ -82,14 +90,6 @@ const Section4 = () => {
               </OutlinedButton>
             </Link>
           </Stack>
-        </Grid>
-
-        {/* Right */}
-        <Grid item xs={12} md={6}>
-          <img
-            src="/assets/tnp.png"
-            style={{ width: "100%", objectFit: "contain" }}
-          />
         </Grid>
       </Grid>
     </Container>
