@@ -15,22 +15,22 @@ export const sidebarLinks3 = [
 export const sidebarLinks = [
   {
     imgURL: "/assets/home.svg",
-    route: "/teacher",
+    route: "/tnp",
     label: "Home",
   },
   {
     imgURL: "/assets/search.svg",
-    route: "/teacher/search",
+    route: "/tnp/search",
     label: "Search",
   },
   {
     imgURL: "/assets/heart.svg",
-    route: "/teacher/activity",
+    route: "/tnp/activity",
     label: "Activity",
   },
   {
     imgURL: "/assets/create.svg",
-    route: "/teacher/create-thread",
+    route: "/tnp/create-thread",
     label: "Post Opportunity",
   },
 ];
@@ -147,24 +147,24 @@ export const themeTypography = {
 export const scheduleData = [
   {
     Id: 1,
-    Subject: "Explosion of Betelgeuse Star",
-    Location: "Space Center USA",
+    Subject: "Online presentation with Zigram",
+    Location: "Online",
     StartTime: "2021-01-10T04:00:00.000Z",
     EndTime: "2021-01-10T05:30:00.000Z",
     CategoryColor: "#1aaa55",
   },
   {
     Id: 2,
-    Subject: "Thule Air Crash Report",
-    Location: "Newyork City",
+    Subject: "Meet with protiviti",
+    Location: "BPIT",
     StartTime: "2021-01-11T06:30:00.000Z",
     EndTime: "2021-01-11T08:30:00.000Z",
     CategoryColor: "#357cd2",
   },
   {
     Id: 3,
-    Subject: "Blue Moon Eclipse",
-    Location: "Space Center USA",
+    Subject: "CG Infinity OA",
+    Location: "Online",
     StartTime: "2021-01-12T04:00:00.000Z",
     EndTime: "2021-01-12T05:30:00.000Z",
     CategoryColor: "#7fa900",
