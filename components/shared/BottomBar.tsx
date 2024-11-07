@@ -2,24 +2,31 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
-import { sidebarLinks } from "@/constants";
+import { sidebarLinks2, sidebarLinks3 } from "@/constants";
+import { useAuth } from "@clerk/nextjs";
 
 function Bottombar() {
+  const router = useRouter();
   const pathname = usePathname();
+  const { userId } = useAuth();
+  const links = pathname.includes("/tnp") ? sidebarLinks2 : sidebarLinks3;
+  const isStudent = links === sidebarLinks3;
 
   return (
     <section className="bottombar">
       <div className="bottombar_container">
-        {sidebarLinks.map((link) => {
-          const isActive =
-            (pathname.includes(link.route) && link.route.length > 1) ||
-            pathname === link.route;
+        {links.map((link) => {
+          const route =
+            link.route === "/tnp/profile"
+              ? `${link.route}/${userId}`
+              : link.route;
+          const isActive = pathname === route;
 
           return (
             <Link
-              href={link.route}
+              href={route}
               key={link.label}
               className={`bottombar_link ${isActive && "bg-primary-500"}`}
             >
@@ -38,19 +45,20 @@ function Bottombar() {
           );
         })}
 
-        <Link
-          href="https://resume-io-inky.vercel.app/"
-          className={`bottombar_link`}
-        >
-          <img
-            src="https://img.icons8.com/ios-glyphs/90/FFFFFF/resume.png"
-            alt=""
-            className="w-[20px] h-[20px]"
-          />
-          <p className="text-subtle-medium text-light-1 max-sm:hidden">
-                Resume
-              </p>
-        </Link>
+        {isStudent && (
+          <Link
+            className={`leftsidebar_link transition duration-200`}
+            href={"https://resume-io-inky.vercel.app/"}
+          >
+            <Image
+              src={"/assets/resume.png"}
+              alt={"resume"}
+              width={24}
+              height={24}
+            />
+            <p className={`text-light-1 max-lg:hidden`}>Resume</p>
+          </Link>
+        )}
       </div>
     </section>
   );
