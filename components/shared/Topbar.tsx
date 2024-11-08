@@ -44,6 +44,7 @@ function TopBar() {
           }}
         /> */}
         <UserButton
+          afterSignOutUrl="/sign-in"
           appearance={{
             baseTheme: dark,
           }}

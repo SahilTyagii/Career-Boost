@@ -68,7 +68,7 @@ async function Page({ params }: { params: { id: string } }) {
       </div> */}
 
       <iframe
-        title="admin dashboard studentio"
+        title="admin dashboard CareerBoost"
         width="900"
         height="500"
         src="https://app.powerbi.com/reportEmbed?reportId=0f3b869b-e971-48f0-94ff-5cd22c56ba72&autoAuth=true&embeddedDemo=true"

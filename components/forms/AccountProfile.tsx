@@ -235,16 +235,6 @@ const AccountProfile = ({ user, btnTitle }: Props) => {
                     />
                   </label>
                   <label className="flex items-center gap-8">
-                    <p className="w-16">Faculty</p>
-                    <Input
-                      type="radio"
-                      value="Faculty"
-                      checked={field.value === "Faculty"}
-                      onChange={() => field.onChange("Faculty")}
-                      className="w-4"
-                    />
-                  </label>
-                  <label className="flex items-center gap-8">
                     <p className="w-16">TNP</p>
                     <Input
                       type="radio"
