@@ -1,9 +1,7 @@
 import "../globals.css";
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import { ClerkProvider } from "@clerk/nextjs";
 import TopBar from "@/components/shared/Topbar";
-import LeftSideBar from "@/components/shared/LeftsideBar";
 import BottomBar from "@/components/shared/BottomBar";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -25,7 +23,7 @@ export default function RootLayout({
         <TopBar />
 
         <main className="flex flex-row">
-          <LeftSideBar />
+          {/* <LeftSideBar /> */}
           <section className="main-container">
             <div className="w-full max-w-4xl">{children}</div>
           </section>
