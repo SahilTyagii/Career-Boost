@@ -8,8 +8,21 @@ import Thread from "../models/thread.model";
 import User from "../models/user.model";
 
 import { connectToDB } from "../mongoose";
+import { 
+  shouldUseHardcodedValues, 
+  getMockUser, 
+  getMockActivity, 
+  getMockUsers,
+  getMockUserPosts 
+} from "../mock-data-service";
 
 export async function fetchUser(userId: string) {
+  // Use hardcoded values if enabled
+  if (shouldUseHardcodedValues()) {
+    console.log("Using hardcoded user data");
+    return getMockUser(userId);
+  }
+
   try {
     connectToDB();
     console.log("MongoDB connected");
@@ -68,6 +81,12 @@ export async function updateUser({
 }
 
 export async function fetchUserPosts(userId: string) {
+  // Use hardcoded values if enabled
+  if (shouldUseHardcodedValues()) {
+    console.log("Using hardcoded user posts data");
+    return getMockUserPosts(userId);
+  }
+
   try {
     connectToDB();
 
@@ -113,6 +132,12 @@ export async function fetchUsers({
   pageSize?: number;
   sortBy?: SortOrder;
 }) {
+  // Use hardcoded values if enabled
+  if (shouldUseHardcodedValues()) {
+    console.log("Using hardcoded users data");
+    return getMockUsers(userId, searchString, pageNumber, pageSize);
+  }
+
   try {
     connectToDB();
 
@@ -159,6 +184,12 @@ export async function fetchUsers({
 }
 
 export async function getActivity(userId: string) {
+  // Use hardcoded values if enabled
+  if (shouldUseHardcodedValues()) {
+    console.log("Using hardcoded activity data");
+    return getMockActivity(userId);
+  }
+
   try {
     connectToDB();
 

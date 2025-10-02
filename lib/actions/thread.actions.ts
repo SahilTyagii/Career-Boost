@@ -7,8 +7,19 @@ import { connectToDB } from "../mongoose";
 import User from "../models/user.model";
 import Thread from "../models/thread.model";
 import Community from "../models/community.model";
+import { 
+  shouldUseHardcodedValues, 
+  getMockPosts, 
+  getMockThreadById 
+} from "../mock-data-service";
 
 export async function fetchPosts(pageNumber = 1, pageSize = 20) {
+  // Use hardcoded values if enabled
+  if (shouldUseHardcodedValues()) {
+    console.log("Using hardcoded posts data");
+    return getMockPosts(pageNumber, pageSize);
+  }
+
   connectToDB();
 
   // Calculate the number of posts to skip based on the page number and page size.
@@ -158,6 +169,12 @@ export async function deleteThread(id: string, path: string): Promise<void> {
 }
 
 export async function fetchThreadById(threadId: string) {
+  // Use hardcoded values if enabled
+  if (shouldUseHardcodedValues()) {
+    console.log("Using hardcoded thread data");
+    return getMockThreadById(threadId);
+  }
+
   connectToDB();
 
   try {
