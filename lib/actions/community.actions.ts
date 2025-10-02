@@ -7,6 +7,12 @@ import Thread from "../models/thread.model";
 import User from "../models/user.model";
 
 import { connectToDB } from "../mongoose";
+import { 
+  shouldUseHardcodedValues, 
+  getMockCommunities, 
+  getMockCommunityDetails,
+  getMockCommunityPosts 
+} from "../mock-data-service";
 
 export async function createCommunity(
   id: string,
@@ -50,6 +56,12 @@ export async function createCommunity(
 }
 
 export async function fetchCommunityDetails(id: string) {
+  // Use hardcoded values if enabled
+  if (shouldUseHardcodedValues()) {
+    console.log("Using hardcoded community details data");
+    return getMockCommunityDetails(id);
+  }
+
   try {
     connectToDB();
 
@@ -71,6 +83,12 @@ export async function fetchCommunityDetails(id: string) {
 }
 
 export async function fetchCommunityPosts(id: string) {
+  // Use hardcoded values if enabled
+  if (shouldUseHardcodedValues()) {
+    console.log("Using hardcoded community posts data");
+    return getMockCommunityPosts(id);
+  }
+
   try {
     connectToDB();
 
@@ -114,6 +132,12 @@ export async function fetchCommunities({
   pageSize?: number;
   sortBy?: SortOrder;
 }) {
+  // Use hardcoded values if enabled
+  if (shouldUseHardcodedValues()) {
+    console.log("Using hardcoded communities data");
+    return getMockCommunities(searchString, pageNumber, pageSize);
+  }
+
   try {
     connectToDB();
 

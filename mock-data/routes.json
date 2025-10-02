@@ -1,0 +1,224 @@
+{
+  "users": {
+    "user_1": {
+      "_id": "mock_user_id_1",
+      "id": "user_1",
+      "username": "john_doe",
+      "name": "John Doe",
+      "bio": "Software Engineer passionate about web development and career growth.",
+      "image": "https://img.clerk.com/preview.png",
+      "role": "TNP",
+      "onboarded": true,
+      "communities": [],
+      "threads": []
+    },
+    "user_2": {
+      "_id": "mock_user_id_2",
+      "id": "user_2",
+      "username": "jane_smith",
+      "name": "Jane Smith",
+      "bio": "Student exploring opportunities in tech.",
+      "image": "https://img.clerk.com/preview.png",
+      "role": "Student",
+      "onboarded": true,
+      "communities": [],
+      "threads": []
+    }
+  },
+  "threads": {
+    "posts": [
+      {
+        "_id": "mock_thread_1",
+        "text": "🚀 Exciting Internship Opportunity at TechCorp!\n\nWe're looking for passionate students interested in software development. Great learning opportunity with mentorship from senior engineers.\n\n📍 Location: Remote\n💰 Stipend: Competitive\n📅 Duration: 3 months\n\nInterested? Drop a comment below!",
+        "author": {
+          "_id": "mock_user_id_1",
+          "id": "user_1",
+          "name": "John Doe",
+          "image": "https://img.clerk.com/preview.png"
+        },
+        "community": null,
+        "createdAt": "2024-01-15T10:30:00.000Z",
+        "parentId": null,
+        "children": [
+          {
+            "_id": "mock_comment_1",
+            "author": {
+              "_id": "mock_user_id_2",
+              "id": "user_2",
+              "name": "Jane Smith",
+              "image": "https://img.clerk.com/preview.png"
+            }
+          }
+        ]
+      },
+      {
+        "_id": "mock_thread_2",
+        "text": "📢 Full-Stack Developer Position Available\n\nOur company is hiring! Looking for developers with experience in React, Node.js, and MongoDB.\n\nRequirements:\n✅ 2+ years experience\n✅ Strong problem-solving skills\n✅ Team player\n\nApply through our careers page!",
+        "author": {
+          "_id": "mock_user_id_1",
+          "id": "user_1",
+          "name": "John Doe",
+          "image": "https://img.clerk.com/preview.png"
+        },
+        "community": null,
+        "createdAt": "2024-01-14T15:20:00.000Z",
+        "parentId": null,
+        "children": []
+      },
+      {
+        "_id": "mock_thread_3",
+        "text": "💼 Career Fair Next Week!\n\nJoin us for our annual career fair where top companies will be recruiting.\n\nDate: January 25th, 2024\nTime: 9 AM - 5 PM\nVenue: Main Campus Auditorium\n\nBring your resumes and be prepared!",
+        "author": {
+          "_id": "mock_user_id_1",
+          "id": "user_1",
+          "name": "John Doe",
+          "image": "https://img.clerk.com/preview.png"
+        },
+        "community": null,
+        "createdAt": "2024-01-13T09:00:00.000Z",
+        "parentId": null,
+        "children": []
+      },
+      {
+        "_id": "mock_thread_4",
+        "text": "🎓 Resume Building Workshop\n\nFree workshop on crafting the perfect resume!\n\nLearn:\n- How to highlight your skills\n- What recruiters look for\n- Common mistakes to avoid\n\nRegister now! Limited seats available.",
+        "author": {
+          "_id": "mock_user_id_1",
+          "id": "user_1",
+          "name": "John Doe",
+          "image": "https://img.clerk.com/preview.png"
+        },
+        "community": null,
+        "createdAt": "2024-01-12T14:30:00.000Z",
+        "parentId": null,
+        "children": []
+      },
+      {
+        "_id": "mock_thread_5",
+        "text": "🌟 Mock Interview Sessions Available\n\nPractice makes perfect! Sign up for one-on-one mock interview sessions with industry professionals.\n\n- Technical interviews\n- Behavioral interviews\n- HR round practice\n\nBook your slot today!",
+        "author": {
+          "_id": "mock_user_id_1",
+          "id": "user_1",
+          "name": "John Doe",
+          "image": "https://img.clerk.com/preview.png"
+        },
+        "community": null,
+        "createdAt": "2024-01-11T11:00:00.000Z",
+        "parentId": null,
+        "children": []
+      }
+    ],
+    "threadDetails": {
+      "mock_thread_1": {
+        "_id": "mock_thread_1",
+        "text": "🚀 Exciting Internship Opportunity at TechCorp!\n\nWe're looking for passionate students interested in software development. Great learning opportunity with mentorship from senior engineers.\n\n📍 Location: Remote\n💰 Stipend: Competitive\n📅 Duration: 3 months\n\nInterested? Drop a comment below!",
+        "author": {
+          "_id": "mock_user_id_1",
+          "id": "user_1",
+          "name": "John Doe",
+          "image": "https://img.clerk.com/preview.png"
+        },
+        "community": null,
+        "createdAt": "2024-01-15T10:30:00.000Z",
+        "parentId": null,
+        "children": [
+          {
+            "_id": "mock_comment_1",
+            "text": "This looks interesting! Can you share more details about the selection process?",
+            "author": {
+              "_id": "mock_user_id_2",
+              "id": "user_2",
+              "name": "Jane Smith",
+              "image": "https://img.clerk.com/preview.png"
+            },
+            "parentId": "mock_thread_1",
+            "createdAt": "2024-01-15T11:00:00.000Z",
+            "children": []
+          }
+        ]
+      }
+    }
+  },
+  "activity": {
+    "user_1": [],
+    "user_2": [
+      {
+        "_id": "mock_comment_1",
+        "author": {
+          "_id": "mock_user_id_1",
+          "id": "user_1",
+          "name": "John Doe",
+          "image": "https://img.clerk.com/preview.png"
+        },
+        "parentId": "mock_thread_1"
+      }
+    ]
+  },
+  "usersList": [
+    {
+      "_id": "mock_user_id_1",
+      "id": "user_1",
+      "username": "john_doe",
+      "name": "John Doe",
+      "image": "https://img.clerk.com/preview.png",
+      "role": "TNP",
+      "communities": []
+    },
+    {
+      "_id": "mock_user_id_2",
+      "id": "user_2",
+      "username": "jane_smith",
+      "name": "Jane Smith",
+      "image": "https://img.clerk.com/preview.png",
+      "role": "Student",
+      "communities": []
+    },
+    {
+      "_id": "mock_user_id_3",
+      "id": "user_3",
+      "username": "bob_wilson",
+      "name": "Bob Wilson",
+      "image": "https://img.clerk.com/preview.png",
+      "role": "Student",
+      "communities": []
+    },
+    {
+      "_id": "mock_user_id_4",
+      "id": "user_4",
+      "username": "alice_brown",
+      "name": "Alice Brown",
+      "image": "https://img.clerk.com/preview.png",
+      "role": "TNP",
+      "communities": []
+    }
+  ],
+  "communities": {
+    "list": [],
+    "details": {}
+  },
+  "userPosts": {
+    "user_1": {
+      "threads": [
+        {
+          "_id": "mock_thread_1",
+          "text": "🚀 Exciting Internship Opportunity at TechCorp!",
+          "community": null,
+          "children": [
+            {
+              "_id": "mock_comment_1",
+              "author": {
+                "_id": "mock_user_id_2",
+                "name": "Jane Smith",
+                "image": "https://img.clerk.com/preview.png",
+                "id": "user_2"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "user_2": {
+      "threads": []
+    }
+  }
+}
