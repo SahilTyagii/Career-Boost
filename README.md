@@ -57,6 +57,35 @@
 
 ---
 
+## 🎬 Demo Mode
+
+CareerBoost includes a **Demo Mode** feature that allows you to showcase the platform with hardcoded data when the backend is not available. Perfect for presentations and demonstrations!
+
+### How to Enable Demo Mode
+
+1. Set the environment variable in your `.env` file:
+   ```bash
+   USE_HARDCODED_VALUES=true
+   ```
+
+2. Start the application:
+   ```bash
+   npm run dev
+   ```
+
+3. The application will now use mock data from `mock-data/routes.json` while authentication continues to work normally through Clerk.
+
+### Features in Demo Mode
+- ✅ **Full Authentication** - Login/logout works normally
+- ✅ **Browse Content** - View all posts, users, and data
+- ✅ **Search & Filter** - All search functionality works
+- ✅ **Navigation** - Complete UI navigation
+- ✅ **Consistent Data** - Same data across sessions
+
+For detailed documentation, see [DEMO_MODE.md](./DEMO_MODE.md)
+
+---
+
 ## 🌟 Future Enhancements  
 
 - Add analytics for TNP cells to track placement performance.  
