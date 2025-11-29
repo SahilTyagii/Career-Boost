@@ -2,13 +2,12 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 import { sidebarLinks2, sidebarLinks3 } from "@/constants";
 import { useAuth } from "@clerk/nextjs";
 
 function Bottombar() {
-  const router = useRouter();
   const pathname = usePathname();
   const { userId } = useAuth();
   const links = pathname.includes("/tnp") ? sidebarLinks2 : sidebarLinks3;
@@ -47,16 +46,18 @@ function Bottombar() {
 
         {isStudent && (
           <Link
-            className={`leftsidebar_link transition duration-200`}
-            href={"https://resume-io-inky.vercel.app/"}
+            className="bottombar_link hover:bg-dark-4 transition duration-200"
+            href="https://resume-io-inky.vercel.app/"
+            target="_blank"
+            rel="noopener noreferrer"
           >
             <Image
-              src={"/assets/resume.png"}
-              alt={"resume"}
-              width={24}
-              height={24}
+              src="/assets/resume.png"
+              alt="resume"
+              width={16}
+              height={16}
             />
-            <p className={`text-light-1 max-lg:hidden`}>Resume</p>
+            <p className="text-subtle-medium text-light-1 max-sm:hidden">Resume</p>
           </Link>
         )}
       </div>

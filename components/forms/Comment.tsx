@@ -1,6 +1,7 @@
 "use client";
 
 import { z } from "zod";
+import { useState } from "react";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
 import { usePathname } from "next/navigation";
@@ -28,6 +29,7 @@ interface Props {
 
 function Comment({ threadId, currentUserImg, currentUserId }: Props) {
   const pathname = usePathname();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const form = useForm<z.infer<typeof CommentValidation>>({
     resolver: zodResolver(CommentValidation),
@@ -37,14 +39,21 @@ function Comment({ threadId, currentUserImg, currentUserId }: Props) {
   });
 
   const onSubmit = async (values: z.infer<typeof CommentValidation>) => {
-    await addCommentToThread(
-      threadId,
-      values.thread,
-      JSON.parse(currentUserId),
-      pathname
-    );
+    setIsSubmitting(true);
+    try {
+      await addCommentToThread(
+        threadId,
+        values.thread,
+        JSON.parse(currentUserId),
+        pathname
+      );
 
-    form.reset();
+      form.reset();
+    } catch (error) {
+      console.error("Error adding comment:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -70,14 +79,19 @@ function Comment({ threadId, currentUserImg, currentUserId }: Props) {
                   {...field}
                   placeholder='Comment...'
                   className='no-focus text-light-1 outline-none'
+                  disabled={isSubmitting}
                 />
               </FormControl>
             </FormItem>
           )}
         />
 
-        <Button type='submit' className='comment-form_btn'>
-          Reply
+        <Button type='submit' className='comment-form_btn' disabled={isSubmitting}>
+          {isSubmitting ? (
+            <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+          ) : (
+            "Reply"
+          )}
         </Button>
       </form>
     </Form>
