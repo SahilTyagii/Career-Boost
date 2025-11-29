@@ -13,14 +13,20 @@ interface ToastProps {
 }
 
 export function Toast({ message, type = "info", isVisible, onClose }: ToastProps) {
+  // Use a ref to store the latest onClose callback to avoid infinite loops
+  const onCloseRef = React.useRef(onClose);
+  React.useEffect(() => {
+    onCloseRef.current = onClose;
+  }, [onClose]);
+
   React.useEffect(() => {
     if (isVisible) {
       const timer = setTimeout(() => {
-        onClose();
+        onCloseRef.current();
       }, TOAST_AUTO_DISMISS_DURATION);
       return () => clearTimeout(timer);
     }
-  }, [isVisible, onClose]);
+  }, [isVisible]);
 
   if (!isVisible) return null;
 
@@ -43,7 +49,7 @@ export function Toast({ message, type = "info", isVisible, onClose }: ToastProps
       <div className="flex items-center gap-3">
         <span className="text-sm font-medium">{message}</span>
         <button
-          onClick={onClose}
+          onClick={() => onCloseRef.current()}
           className="ml-2 text-white/80 hover:text-white transition-colors"
         >
           ✕

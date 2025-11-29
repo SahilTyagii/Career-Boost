@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { Toast } from "@/components/ui/toast";
 
@@ -14,6 +14,10 @@ interface AccessDeniedRedirectProps {
 export default function AccessDeniedRedirect({ message, redirectTo }: AccessDeniedRedirectProps) {
   const router = useRouter();
   const [showToast, setShowToast] = useState(true);
+
+  const handleCloseToast = useCallback(() => {
+    setShowToast(false);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -29,7 +33,7 @@ export default function AccessDeniedRedirect({ message, redirectTo }: AccessDeni
         message={message}
         type="warning"
         isVisible={showToast}
-        onClose={() => setShowToast(false)}
+        onClose={handleCloseToast}
       />
       <div className="text-center">
         <div className="h-12 w-12 animate-spin rounded-full border-4 border-primary-500 border-t-transparent mx-auto mb-4" />
