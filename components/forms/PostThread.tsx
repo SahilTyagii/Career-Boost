@@ -1,6 +1,7 @@
 "use client";
 
 import * as z from "zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useOrganization } from "@clerk/nextjs";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -27,6 +28,7 @@ interface Props {
 function PostThread({ userId }: Props) {
   const router = useRouter(); 
   const pathname = usePathname();
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const { organization } = useOrganization();
 
@@ -39,14 +41,21 @@ function PostThread({ userId }: Props) {
   });
 
   const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {
-    await createThread({
-      text: values.thread,
-      author: userId,
-      communityId: organization ? organization.id : null,
-      path: pathname,
-    });
+    setIsSubmitting(true);
+    try {
+      await createThread({
+        text: values.thread,
+        author: userId,
+        communityId: organization ? organization.id : null,
+        path: pathname,
+      });
 
-    router.push("/");
+      router.push("/");
+    } catch (error) {
+      console.error("Error creating thread:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -71,8 +80,15 @@ function PostThread({ userId }: Props) {
           )}
         />
 
-        <Button type='submit' className='bg-primary-500'>
-          Post Thread
+        <Button type='submit' className='bg-primary-500' disabled={isSubmitting}>
+          {isSubmitting ? (
+            <div className="flex items-center gap-2">
+              <div className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+              <span>Posting...</span>
+            </div>
+          ) : (
+            "Post Thread"
+          )}
         </Button>
       </form>
     </Form>

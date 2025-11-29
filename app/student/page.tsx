@@ -1,8 +1,8 @@
 import { currentUser } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
 
 import ThreadCard from "@/components/cards/ThreadCard";
 import Pagination from "@/components/shared/Pagination";
+import AccessDeniedRedirect from "@/components/shared/AccessDeniedRedirect";
 
 import { fetchPosts } from "@/lib/actions/thread.actions";
 import { fetchUser } from "@/lib/actions/user.actions";
@@ -16,8 +16,26 @@ async function Home({
   if (!user) return null;
 
   const userInfo = await fetchUser(user.id);
-  if (!userInfo?.onboarded || userInfo?.role !== "Student")
-    redirect("/onboarding");
+  
+  // Show toast and redirect if user is not onboarded
+  if (!userInfo?.onboarded) {
+    return (
+      <AccessDeniedRedirect
+        message="Please complete your profile to continue."
+        redirectTo="/onboarding"
+      />
+    );
+  }
+  
+  // Redirect TNP users to their area
+  if (userInfo?.role !== "Student") {
+    return (
+      <AccessDeniedRedirect
+        message="Redirecting to your dashboard..."
+        redirectTo="/tnp"
+      />
+    );
+  }
 
   const result = await fetchPosts(
     searchParams.page ? +searchParams.page : 1,
