@@ -14,9 +14,11 @@ interface Props {
 function Searchbar({ routeType, role }: Props) {
   const router = useRouter();
   const [search, setSearch] = useState("");
+  const [isSearching, setIsSearching] = useState(false);
 
   // query after 0.3s of no input
   useEffect(() => {
+    setIsSearching(true);
     const delayDebounceFn = setTimeout(() => {
       if (search) {
         router.push(
@@ -25,20 +27,25 @@ function Searchbar({ routeType, role }: Props) {
       } else {
         router.push(`${role === "tnp" ? "/tnp" : "/teacher"}${routeType}`);
       }
+      setIsSearching(false);
     }, 300);
 
     return () => clearTimeout(delayDebounceFn);
-  }, [search, routeType]);
+  }, [search, routeType, role, router]);
 
   return (
     <div className="searchbar">
-      <Image
-        src="/assets/search-gray.svg"
-        alt="search"
-        width={24}
-        height={24}
-        className="object-contain"
-      />
+      {isSearching ? (
+        <div className="h-6 w-6 animate-spin rounded-full border-2 border-gray-1 border-t-transparent" />
+      ) : (
+        <Image
+          src="/assets/search-gray.svg"
+          alt="search"
+          width={24}
+          height={24}
+          className="object-contain"
+        />
+      )}
       <Input
         id="text"
         value={search}
