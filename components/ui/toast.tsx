@@ -3,6 +3,8 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
+const TOAST_AUTO_DISMISS_DURATION = 4000;
+
 interface ToastProps {
   message: string;
   type?: "success" | "error" | "warning" | "info";
@@ -15,7 +17,7 @@ export function Toast({ message, type = "info", isVisible, onClose }: ToastProps
     if (isVisible) {
       const timer = setTimeout(() => {
         onClose();
-      }, 4000);
+      }, TOAST_AUTO_DISMISS_DURATION);
       return () => clearTimeout(timer);
     }
   }, [isVisible, onClose]);

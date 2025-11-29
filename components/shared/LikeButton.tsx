@@ -12,50 +12,68 @@ function LikeButton({ threadId, currentUserId }: LikeButtonProps) {
   const [isLiked, setIsLiked] = useState(false);
   const [likeCount, setLikeCount] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
-  // Load like state from localStorage on mount
+  // Ensure we're on the client before accessing localStorage
   useEffect(() => {
-    const storedLikes = localStorage.getItem(`thread-likes-${threadId}`);
-    const userLikes = localStorage.getItem(`user-likes-${currentUserId}`);
-    
-    if (storedLikes) {
-      setLikeCount(parseInt(storedLikes, 10));
+    setIsClient(true);
+  }, []);
+
+  // Load like state from localStorage on mount (client-side only)
+  useEffect(() => {
+    if (!isClient) return;
+
+    try {
+      const storedLikes = localStorage.getItem(`thread-likes-${threadId}`);
+      const userLikes = localStorage.getItem(`user-likes-${currentUserId}`);
+      
+      if (storedLikes) {
+        setLikeCount(parseInt(storedLikes, 10));
+      }
+      
+      if (userLikes) {
+        const likedThreads = JSON.parse(userLikes) as string[];
+        setIsLiked(likedThreads.includes(threadId));
+      }
+    } catch (error) {
+      console.error("Error loading likes from localStorage:", error);
     }
-    
-    if (userLikes) {
-      const likedThreads = JSON.parse(userLikes) as string[];
-      setIsLiked(likedThreads.includes(threadId));
-    }
-  }, [threadId, currentUserId]);
+  }, [threadId, currentUserId, isClient]);
 
   const handleLike = () => {
+    if (!isClient) return;
+    
     setIsAnimating(true);
     
-    // Get current user's liked threads
-    const userLikesKey = `user-likes-${currentUserId}`;
-    const userLikes = localStorage.getItem(userLikesKey);
-    let likedThreads: string[] = userLikes ? JSON.parse(userLikes) : [];
-    
-    // Get current thread's like count
-    const threadLikesKey = `thread-likes-${threadId}`;
-    let currentLikeCount = likeCount;
+    try {
+      // Get current user's liked threads
+      const userLikesKey = `user-likes-${currentUserId}`;
+      const userLikes = localStorage.getItem(userLikesKey);
+      let likedThreads: string[] = userLikes ? JSON.parse(userLikes) : [];
+      
+      // Get current thread's like count
+      const threadLikesKey = `thread-likes-${threadId}`;
+      let currentLikeCount = likeCount;
 
-    if (isLiked) {
-      // Unlike
-      likedThreads = likedThreads.filter(id => id !== threadId);
-      currentLikeCount = Math.max(0, currentLikeCount - 1);
-      setIsLiked(false);
-    } else {
-      // Like
-      likedThreads.push(threadId);
-      currentLikeCount += 1;
-      setIsLiked(true);
+      if (isLiked) {
+        // Unlike
+        likedThreads = likedThreads.filter(id => id !== threadId);
+        currentLikeCount = Math.max(0, currentLikeCount - 1);
+        setIsLiked(false);
+      } else {
+        // Like
+        likedThreads.push(threadId);
+        currentLikeCount += 1;
+        setIsLiked(true);
+      }
+
+      // Save to localStorage
+      localStorage.setItem(userLikesKey, JSON.stringify(likedThreads));
+      localStorage.setItem(threadLikesKey, currentLikeCount.toString());
+      setLikeCount(currentLikeCount);
+    } catch (error) {
+      console.error("Error saving like to localStorage:", error);
     }
-
-    // Save to localStorage
-    localStorage.setItem(userLikesKey, JSON.stringify(likedThreads));
-    localStorage.setItem(threadLikesKey, currentLikeCount.toString());
-    setLikeCount(currentLikeCount);
 
     // Reset animation
     setTimeout(() => setIsAnimating(false), 300);

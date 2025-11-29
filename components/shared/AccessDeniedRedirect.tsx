@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Toast } from "@/components/ui/toast";
 
+const REDIRECT_DELAY_MS = 2000;
+
 interface AccessDeniedRedirectProps {
   message: string;
   redirectTo: string;
@@ -16,7 +18,7 @@ export default function AccessDeniedRedirect({ message, redirectTo }: AccessDeni
   useEffect(() => {
     const timer = setTimeout(() => {
       router.push(redirectTo);
-    }, 2000);
+    }, REDIRECT_DELAY_MS);
 
     return () => clearTimeout(timer);
   }, [router, redirectTo]);

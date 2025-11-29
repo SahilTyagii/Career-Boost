@@ -6,6 +6,8 @@ import { useEffect, useState } from "react";
 
 import { Input } from "../ui/input";
 
+const SEARCH_DEBOUNCE_MS = 300;
+
 interface Props {
   routeType: string;
   role: string;
@@ -16,7 +18,7 @@ function Searchbar({ routeType, role }: Props) {
   const [search, setSearch] = useState("");
   const [isSearching, setIsSearching] = useState(false);
 
-  // query after 0.3s of no input
+  // query after debounce delay
   useEffect(() => {
     setIsSearching(true);
     const delayDebounceFn = setTimeout(() => {
@@ -28,10 +30,11 @@ function Searchbar({ routeType, role }: Props) {
         router.push(`${role === "tnp" ? "/tnp" : "/teacher"}${routeType}`);
       }
       setIsSearching(false);
-    }, 300);
+    }, SEARCH_DEBOUNCE_MS);
 
     return () => clearTimeout(delayDebounceFn);
-  }, [search, routeType, role, router]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [search, routeType, role]);
 
   return (
     <div className="searchbar">
